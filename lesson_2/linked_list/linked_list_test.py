@@ -111,18 +111,18 @@ class LinkedListInsert(unittest.TestCase):
         self.assertEqual(linked_list.get_position(1).value, "new-element")
         self.assertEqual(linked_list.get_position(2).value, "existing-element")
 
-    # def test_inserting_at_the_last_position(self):
-    #     # Arrange
-    #     linked_list = LinkedList(head=Element("1st-element"))
-    #     linked_list.append(Element("2st-element"))
-    #     linked_list.append(Element("3rd-element"))
-    #
-    #     # Act
-    #     linked_list.insert(Element("new-element"), 4)
-    #
-    #     # Assert
-    #     self.assertEqual(linked_list.length(), 4)
-    #     self.assertEqual(linked_list.get_position(4).value, "new-element")
+    def test_inserting_at_the_last_position(self):
+        # Arrange
+        linked_list = LinkedList(head=Element("1st-element"))
+        linked_list.append(Element("2st-element"))
+        linked_list.append(Element("3rd-element"))
+
+        # Act
+        linked_list.insert(Element("new-element"), 4)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 4)
+        self.assertEqual(linked_list.get_position(4).value, "new-element")
 
     def test_inserting_in_the_middle(self):
         # Arrange
@@ -136,6 +136,81 @@ class LinkedListInsert(unittest.TestCase):
         # Assert
         self.assertEqual(linked_list.length(), 4)
         self.assertEqual(linked_list.get_position(2).value, "new-element")
+
+
+class LinkedListDelete(unittest.TestCase):
+    def test_deleting_element_on_the_middle_of_the_list(self):
+        # Arrange
+        linked_list = LinkedList()
+        linked_list.append(Element(1))
+        linked_list.append(Element(2))
+        linked_list.append(Element(3))
+
+        # Act
+        linked_list.delete(2)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 2)
+        self.assertEqual(linked_list.get_position(1).value, 1)
+        self.assertEqual(linked_list.get_position(2).value, 3)
+
+    def test_deleting_first_occurrence_of_element(self):
+        # Arrange
+        linked_list = LinkedList()
+        linked_list.append(Element(1))
+        linked_list.append(Element(2))
+        linked_list.append(Element(2))
+        linked_list.append(Element(3))
+
+        # Act
+        linked_list.delete(2)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 3)
+        self.assertEqual(linked_list.get_position(1).value, 1)
+        self.assertEqual(linked_list.get_position(2).value, 2)
+        self.assertEqual(linked_list.get_position(3).value, 3)
+
+    def test_deleting_element_at_the_end_of_the_list(self):
+        # Arrange
+        linked_list = LinkedList()
+        linked_list.append(Element(1))
+        linked_list.append(Element(2))
+        linked_list.append(Element(3))
+
+        # Act
+        linked_list.delete(3)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 2)
+        self.assertEqual(linked_list.get_position(1).value, 1)
+        self.assertEqual(linked_list.get_position(2).value, 2)
+
+    def test_deleting_element_at_the_start_of_the_list(self):
+        # Arrange
+        linked_list = LinkedList()
+        linked_list.append(Element(1))
+        linked_list.append(Element(2))
+        linked_list.append(Element(3))
+
+        # Act
+        linked_list.delete(1)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 2)
+        self.assertEqual(linked_list.get_position(1).value, 2)
+        self.assertEqual(linked_list.get_position(2).value, 3)
+
+    def test_deleting_element_on_list_with_only_1_element(self):
+        # Arrange
+        linked_list = LinkedList(head=Element(1))
+
+        # Act
+        linked_list.delete(1)
+
+        # Assert
+        self.assertEqual(linked_list.length(), 0)
+        self.assertEqual(linked_list.get_position(1), None)
 
 
 

@@ -69,56 +69,28 @@ class LinkedList(object):
             if i == position - 1:
                 new_element.next = current
                 past_element.next = new_element
+                return
 
             past_element = current
             current = current.next
             i += 1
 
-        """Insert a new node at the given position.
-        Assume the first position is "1".
-        Inserting at position 3 means between
-        the 2nd and 3rd elements."""
-        pass
+        if i == position - 1:
+            new_element.next = None
+            past_element.next = new_element
+            return
 
-    def delete(self, value):
-        """Delete the first node with a given value."""
-        pass
+    def delete(self, value) -> None:
+        if self.head and self.head.value == value:
+            self.head = self.head.next
+            return
 
+        current = self.head
+        past_element = None
 
-# Test cases
-# Set up some Elements
-e1 = Element(1)
-e2 = Element(2)
-e3 = Element(3)
-e4 = Element(4)
+        while current:
+            if current.value == value:
+                past_element.next = current.next
 
-# Start setting up a LinkedList
-ll = LinkedList(e1)
-ll.append(e2)
-ll.append(e3)
-
-# # Test get_position
-# # Should print 3
-# print
-# ll.head.next.next.value
-# # Should also print 3
-# print
-# ll.get_position(3).value
-#
-# # Test insert
-# ll.insert(e4, 3)
-# # Should print 4 now
-# print
-# ll.get_position(3).value
-#
-# # Test delete
-# ll.delete(1)
-# # Should print 2 now
-# print
-# ll.get_position(1).value
-# # Should print 4 now
-# print
-# ll.get_position(2).value
-# # Should print 3 now
-# print
-# ll.get_position(3).value
+            past_element = current
+            current = current.next
