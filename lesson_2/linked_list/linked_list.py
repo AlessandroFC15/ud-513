@@ -91,6 +91,11 @@ class LinkedList(object):
         while current:
             if current.value == value:
                 past_element.next = current.next
+                return
 
             past_element = current
             current = current.next
+
+    def delete_first(self):
+        if self.head:
+            self.head = self.head.next
