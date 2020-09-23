@@ -9,7 +9,14 @@ class Queue:
         return self.storage[0].value if self.storage[0] else None
 
     def dequeue(self):
-        pass
+        if len(self.storage) == 0:
+            return None
+
+        head = self.storage[0].value
+
+        self.storage = self.storage[1:]
+
+        return head
 
     def length(self):
         return len(self.storage)
